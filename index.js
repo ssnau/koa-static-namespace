@@ -57,7 +57,7 @@ function serve(root, opts) {
     if (this.method != 'HEAD' && this.method != 'GET') return;
     // response is already handled
     if (this.body != null || this.status != 404) return;
-
+    this.set('Cache-Control', 'max-age=' + (opts.maxAge || 31536000));
     yield send(this, getPath(this), opts);
   };
 }
